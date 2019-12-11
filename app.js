@@ -23,13 +23,6 @@ app.use(cors());
 //app.use(bodyParser.json());
 
 
-//importar rutas
-const route = require('./routes/app.routes');
-
-const routeUsuario = require('./routes/usuario.routes');
-const loginUsuario = require('./routes/login.routes');
-
-
 //conexion a base de datos
 mongoose.connect('mongodb://localhost/hospitalDB', {
     useCreateIndex: true,
@@ -41,9 +34,31 @@ mongoose.connect('mongodb://localhost/hospitalDB', {
     console.log('Conectado a base de datos');
 });
 
+//importar rutas
+const route = require('./routes/app.routes');
+
+const routeUsuario = require('./routes/usuario.routes');
+const loginUsuario = require('./routes/login.routes');
+const routeHospital = require('./routes/hospital.routes');
+const routeMedico = require('./routes/medico.routes');
+const routeBusqueda = require('./routes/busqueda.routes');
+const routeUpload = require('./routes/upload.routes');
+const routeImagenes = require('./routes/imagenes.routes');
+
+
+
 //rutas
 app.use('/api/adminpro/usuario', routeUsuario);
 app.use('/api/adminpro/usuario/login', loginUsuario);
+
+app.use('/api/adminpro/hospital', routeHospital);
+app.use('/api/adminpro/medico', routeMedico);
+
+app.use('/api/adminpro/busqueda', routeBusqueda);
+
+app.use('/api/adminpro/upload', routeUpload);
+app.use('/api/adminpro/img', routeImagenes);
+
 
 app.use('/api/adminpro', route);
 
